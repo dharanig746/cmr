@@ -6,9 +6,9 @@ pipeline {
             git credentialsId: 'github', url:'https://github.com/dharanig746/cmr.git'
         }
         }
-     stage("Maven Build"){
+     stage("Build"){
         steps{
-              sh "/var/lib/jenkins/workspace/pi@tmp/durable-4558d58f/script.sh: 1: mvn clean install"
+              sh "mvn clean install"
               }
              }
      stage("Building image"){
