@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages{
-    stage("Git Checkout"){
+    stage("Git Clone"){
          steps{
             git credentialsId: 'github', url:'https://github.com/dharanig746/cmr.git'
         }
