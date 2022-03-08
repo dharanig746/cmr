@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages{
-    stages ("Git Checkout"){
+    stage("Git Checkout"){
          steps{
             git credentialsId: 'github', url:'https://github.com/dharanig746/cmr.git'
         }
