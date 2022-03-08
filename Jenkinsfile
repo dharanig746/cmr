@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment{
+        PATH = "/usr/share/maven/bin:$PATH"
+    }
     stages{
      stage("Git Checkout"){
         steps{
@@ -8,7 +11,7 @@ pipeline {
         }
      stage("Maven Build"){
         steps{
-            sh "https://github.com/dharanig746/cmr.git mvn clean install"
+            sh "mvn clean install"
               }
              }
      stage("Building image"){
