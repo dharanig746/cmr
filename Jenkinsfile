@@ -8,7 +8,7 @@ pipeline {
         }
      stage("Maven Build"){
         steps{
-              sh "/home/ubuntu/cmr mvn clean install"
+              sh "/home/ubuntu/cmr: mvn clean install"
               }
              }
      stage("Building image"){
