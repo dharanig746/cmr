@@ -7,7 +7,7 @@ pipeline {
         }
         }
     stage("Maven Build"){
-        steps mvn -f path/to/pom.xml{
+        steps{
               sh "mvn clean install"
               }
              }
