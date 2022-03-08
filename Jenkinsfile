@@ -1,30 +1,21 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3-alpine'
-            args '-v /root/.m2:/root/.m2'
+    agent any
+    stages {"Git Checkout"{
+        steps{
+            git credentialsId: 'github', url:'https://github.com/dharanig746/cmr.git'
         }
     }
-    stages {
-        stage('Build') {
-            steps {
-                sh 'mvn -B -DskipTests clean package'
-            }
-        }
-        stage('Test') {
-            steps {
-                sh 'mvn test'
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
+            stage("Maven Build"){
+                steps{
+                    sh "mvn clean install"
                 }
             }
-        }
-        stage('Deliver') {
-            steps {
-                sh './jenkins/scripts/deliver.sh'
+            stage("Building image"){
+                steps{
+                    sh "docker build -t cmr-repo/myapp:1.0 ."
+                    sh "docker run -dt cmr-repo/myapp:1.0 /bin/bash"
+                    sh "docker tag cmr-repo/myapp:1.0 dharanig746/cmr-repo:1.0"
+                    sh "docker push dharanig746/cmr-repo:1.0
+                }
             }
-        }
-    }
-}
+           }
