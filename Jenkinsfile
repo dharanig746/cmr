@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    environment {
-        PATH = "/home/ubuntu/cmr:$PATH"
-    }
     stages{
      stage("Git Checkout"){
          steps{
@@ -11,7 +8,7 @@ pipeline {
         }
      stage("Maven Build"){
         steps{
-              sh "mvn clean install"
+              sh "/home/ubuntu/cmr mvn clean install"
               }
              }
      stage("Building image"){
@@ -23,4 +20,3 @@ pipeline {
                     }
                   }
                  }
-                }
