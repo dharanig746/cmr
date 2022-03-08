@@ -1,13 +1,13 @@
 pipeline {
     agent any
     stages{
-    stage("Git Clone"){
+    stage("Git Checkout"){
          steps{
             git credentialsId: 'github', url:'https://github.com/dharanig746/cmr.git'
         }
         }
     stage("Maven Build"){
-         steps{
+        steps mvn -f path/to/pom.xml{
               sh "mvn clean install"
               }
              }
