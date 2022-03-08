@@ -8,7 +8,7 @@ pipeline {
         }
      stage("Maven Build"){
         steps{
-              sh "/home/ubuntu/cmr: mvn clean install"
+              sh "/var/lib/jenkins/workspace/pi@tmp/durable-4558d58f/script.sh: 1: mvn clean install"
               }
              }
      stage("Building image"){
