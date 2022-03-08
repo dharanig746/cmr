@@ -15,8 +15,8 @@ pipeline {
          steps{
             sh "docker build -t cmr-repo/myapp:1.0 ."
             sh "docker run -dt cmr-repo/myapp:1.0 /bin/bash"
-            sh "docker tag cmr-repo/myapp:1.0 dharanig746/cmr-repo:1.0"
-            sh "docker push dharanig746/cmr-repo:1.0"
+            sh "docker tag cmr-repo/myapp:1.0 monith/cmr-repo:1.0"
+            sh "docker push monith/cmr-repo:1.0"
                     }
                   }
                  }
