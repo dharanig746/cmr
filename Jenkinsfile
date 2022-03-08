@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        PATH = "/usr/share/maven:$PATH"
+        PATH = "/home/ubuntu/cmr:$PATH"
     }
     stages{
      stage("Git Checkout"){
