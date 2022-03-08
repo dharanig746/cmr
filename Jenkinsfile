@@ -1,12 +1,15 @@
 pipeline {
     agent any
+    environment {
+        PATH = "/usr/share/maven:$PATH"
+    }
     stages{
-    stage("Git Checkout"){
+     stage("Git Checkout"){
          steps{
             git credentialsId: 'github', url:'https://github.com/dharanig746/cmr.git'
         }
         }
-    stage("Maven Build"){
+     stage("Maven Build"){
         steps{
               sh "mvn clean install"
               }
