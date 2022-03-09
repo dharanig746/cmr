@@ -12,7 +12,7 @@ pipeline {
      stage("Maven Build"){
         steps{
             environment{
-                PATH = "/home/ubuntu/cmr:$PATH"
+                PATH = "/cmr:$PATH"
             }
             sh "mvn clean install"
               }
