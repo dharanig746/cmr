@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment{
-        PATH = "//usr/share/man/man1/mvn.1:$PATH"
+        PATH = "/usr/share/man/man1/mvn.1:$PATH"
     }
     stages{
      stage("Git Checkout"){
@@ -11,7 +11,10 @@ pipeline {
         }
      stage("Maven Build"){
         steps{
-            sh "/home/ubuntu/cmr/mvn clean install"
+            environment{
+                PATH = "/home/ubuntu/cmr:$PATH"
+            }
+            sh "mvn clean install"
               }
              }
      stage("Building image"){
