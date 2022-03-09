@@ -14,7 +14,7 @@ pipeline {
          PATH = "/cmr:$PATH"
          }
          steps{
-            sh "mvn -f /home/ubuntu/cmr/to/pom.xml <clean install>"
+            sh "<mvn clean install>"
               }
              }
      stage("Building image"){
