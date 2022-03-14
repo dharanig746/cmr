@@ -1,29 +1,27 @@
 pipeline {
     agent any
-    environment{
-        PATH = "/usr/share/man/man1/mvn.1:$PATH"
-    }
     stages{
-     stage("Git Checkout"){
+        stage("git checkout"){
         steps{
-            git credentialsId: 'github', url:'https://github.com/dharanig746/cmr.git'
+            git branch: 'main', credentialsId: '8d699274-d35f-4015-9550-443cf6f18b04', url: 'https://github.com/dharanig746/cmr.git'
+        }    
         }
+        stage("maven build"){
+            steps{
+                sh "mvn clean install"
+            }
         }
-     stage("Maven Build"){
-     environment{
-         PATH = "/cmr:$PATH"
-         }
-         steps{
-            sh "<mvn clean install>"
-              }
-             }
-     stage("Building image"){
-        steps{
-            sh "docker build -t cmr-repo/myapp:1.0 ."
-            sh "docker run -dt cmr-repo/myapp:1.0 /bin/bash"
-            sh "docker tag cmr-repo/myapp:1.0 monith/cmr-repo:1.0"
-            sh "docker push monith/cmr-repo:1.0"
+        stage("build docker image"){
+            steps{
+                sh "docker build -t cmr/myapp:1.0 ."
+                withCredentials([string(credentialsId: 'docker-password', variable: 'dockerhubpwd')]) {
+                sh "docker login -u monith -p ${dockerhubpwd}"
+                sh "docker tag cmr/myapp:1.0 monith/cmr:1.0"
+                sh "docker push monith/cmr:1.0"
                     }
-                  }
-                 }
-                }
+                
+                
+            }
+        }
+    }    
+}    
